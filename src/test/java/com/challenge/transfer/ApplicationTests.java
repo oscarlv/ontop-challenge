@@ -1,4 +1,4 @@
-package com.demo.challenge;
+package com.challenge.transfer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
