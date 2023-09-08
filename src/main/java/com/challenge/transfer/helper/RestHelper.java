@@ -20,21 +20,20 @@ public class RestHelper {
         return url;
     }
 
-    public <T> T executeServiceCall(String urlCall, HttpEntity<?> requestEntity,
+    public <T> ResponseEntity<T> executeServiceCall(String urlCall, HttpEntity<?> requestEntity,
                                                              Class<T> responseType, HttpMethod method) {
         try {
             final ResponseEntity<T> response = this.restTemplate.exchange(urlCall, method, requestEntity, responseType);
             //TODO: Construct a custom response in case response is not 200?
-            return response.getBody();
+            return response;
         } catch(HttpStatusCodeException e) {
-            return (T) ResponseEntity.status(e.getRawStatusCode())
-                    .headers(e.getResponseHeaders())
+            return (ResponseEntity<T>) ResponseEntity.status(e.getRawStatusCode())
                     .body(e.getResponseBodyAsString());
         } catch (ResourceAccessException e) {
-            return (T) ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                    .body("Service unavailable due to a network issue.");
+            return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                    .body("Service unavailable.");
         } catch (RestClientException e) {
-            return (T) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Internal server error occurred.");
         }
     }

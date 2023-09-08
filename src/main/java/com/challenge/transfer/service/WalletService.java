@@ -1,9 +1,10 @@
 package com.challenge.transfer.service;
 
-import com.challenge.transfer.entity.WalletRequest;
-import com.challenge.transfer.entity.WalletResponse;
+import com.challenge.transfer.entity.wallet.WalletRequest;
+import com.challenge.transfer.entity.wallet.WalletResponse;
+import org.springframework.http.ResponseEntity;
 
 public interface WalletService {
-    WalletResponse callWalletService(WalletRequest walletRequest,
-                                     String walletPath);
+    ResponseEntity<?> callWalletService(WalletRequest walletRequest,
+                                        String walletPath);
 }

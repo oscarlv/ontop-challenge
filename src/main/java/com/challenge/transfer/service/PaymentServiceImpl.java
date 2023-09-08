@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,12 +20,12 @@ public class PaymentServiceImpl implements PaymentService{
     private RestHelper restHelper;
 
     @Override
-    public PaymentResponse callPaymentService(PaymentRequest paymentRequest, String paymentPath) {
+    public ResponseEntity<?> callPaymentService(PaymentRequest paymentRequest, String paymentPath) {
         String paymentServiceUrl = restHelper.createUrl(baseUrlPayment, paymentPath);
 
         final HttpEntity<PaymentRequest> requestHttpEntity = new HttpEntity<>(paymentRequest);
 
         return restHelper.executeServiceCall(paymentServiceUrl, requestHttpEntity,
-                PaymentResponse.class, HttpMethod.POST);
+                Object.class, HttpMethod.POST);
     }
 }

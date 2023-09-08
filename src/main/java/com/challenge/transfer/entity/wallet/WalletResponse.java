@@ -1,4 +1,4 @@
-package com.challenge.transfer.entity;
+package com.challenge.transfer.entity.wallet;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;

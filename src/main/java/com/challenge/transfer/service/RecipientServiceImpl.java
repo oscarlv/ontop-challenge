@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -22,7 +23,7 @@ public class RecipientServiceImpl implements RecipientService{
     private RestHelper restHelper;
 
     @Override
-    public GetRecipientResponse getRecipientInformation(Integer recipientId) {
+    public ResponseEntity<?> getRecipientInformation(Integer recipientId) {
         UriComponents builder
                 = UriComponentsBuilder
                 .fromUriString(PATH_GET_RECIPIENT).buildAndExpand(recipientId);
